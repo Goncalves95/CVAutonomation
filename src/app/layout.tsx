@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "CV Generator",
-  description: "Gera o teu CV em PDF",
+  description: "Generate your CV as a PDF",
 };
 
 export default function RootLayout({

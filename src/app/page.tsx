@@ -13,7 +13,7 @@ const PDFDownloadButton = dynamic(
 
 const PDFPreviewPane = dynamic(
   () => import('@/components/pdf-download-button').then(m => m.PDFPreviewPane),
-  { ssr: false, loading: () => <div className="flex items-center justify-center h-full text-gray-400 text-sm">A carregar pré-visualização…</div> }
+  { ssr: false, loading: () => <div className="flex items-center justify-center h-full text-gray-400 text-sm">Loading preview…</div> }
 )
 
 export default function Home() {
@@ -41,7 +41,7 @@ export default function Home() {
             onClick={() => setShowPreview(p => !p)}
             className="text-sm text-gray-600 hover:text-gray-900 font-medium hidden md:block"
           >
-            {showPreview ? 'Ocultar preview' : 'Mostrar preview'}
+            {showPreview ? 'Hide preview' : 'Show preview'}
           </button>
           <div className="w-48">
             <PDFDownloadButton data={cvData} />
@@ -66,8 +66,8 @@ export default function Home() {
         {showPreview && (
           <div className="hidden md:flex flex-1 flex-col bg-gray-100">
             <div className="flex items-center justify-between px-4 py-2 bg-gray-200 text-xs text-gray-500 font-medium uppercase tracking-wide">
-              <span>Pré-visualização PDF</span>
-              <span className="text-gray-400">actualiza ao editar</span>
+              <span>PDF Preview</span>
+              <span className="text-gray-400">updates as you type</span>
             </div>
             <div className="flex-1 p-4">
               <PDFPreviewPane data={cvData} />

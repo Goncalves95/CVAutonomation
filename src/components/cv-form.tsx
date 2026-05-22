@@ -7,13 +7,7 @@ import { defaultCVData } from '@/lib/default-data'
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
-function Field({
-  label,
-  children,
-}: {
-  label: string
-  children: React.ReactNode
-}) {
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1">
       <label className="text-xs font-medium text-gray-600 uppercase tracking-wide">{label}</label>
@@ -53,7 +47,7 @@ function RemoveButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       className="text-xs text-red-400 hover:text-red-600 font-medium ml-auto"
     >
-      Remover
+      Remove
     </button>
   )
 }
@@ -92,7 +86,7 @@ function PersonalSection({
 
   return (
     <div className="flex flex-col gap-3">
-      <SectionHeader title="Informação Pessoal" />
+      <SectionHeader title="Personal Information" />
       <div className="flex items-start gap-4">
         <div className="flex flex-col items-center gap-2">
           <div
@@ -100,9 +94,9 @@ function PersonalSection({
             onClick={() => fileRef.current?.click()}
           >
             {photoPreview ? (
-              <img src={photoPreview} alt="foto" className="w-full h-full object-cover" />
+              <img src={photoPreview} alt="photo" className="w-full h-full object-cover" />
             ) : (
-              <span className="text-gray-400 text-xs text-center px-2">Foto</span>
+              <span className="text-gray-400 text-xs text-center px-2">Photo</span>
             )}
           </div>
           <button
@@ -110,37 +104,37 @@ function PersonalSection({
             onClick={() => fileRef.current?.click()}
             className="text-xs text-blue-600 hover:text-blue-800"
           >
-            {photoPreview ? 'Alterar' : 'Upload'}
+            {photoPreview ? 'Change' : 'Upload'}
           </button>
           <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFile} />
         </div>
         <div className="flex-1 grid grid-cols-2 gap-3">
-          <Field label="Nome completo">
-            <input {...register('personal.name')} className={inputCls} placeholder="Nome Apelido" />
+          <Field label="Full Name">
+            <input {...register('personal.name')} className={inputCls} placeholder="John Doe" />
           </Field>
-          <Field label="Título / Cargo">
-            <input {...register('personal.title')} className={inputCls} placeholder="Ex: Software Engineer" />
+          <Field label="Job Title">
+            <input {...register('personal.title')} className={inputCls} placeholder="e.g. Software Engineer" />
           </Field>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <Field label="Telefone">
-          <input {...register('personal.phone')} className={inputCls} placeholder="+351 900 000 000" />
+        <Field label="Phone">
+          <input {...register('personal.phone')} className={inputCls} placeholder="+1 000 000 0000" />
         </Field>
         <Field label="Email">
-          <input {...register('personal.email')} className={inputCls} placeholder="email@exemplo.com" />
+          <input {...register('personal.email')} className={inputCls} placeholder="email@example.com" />
         </Field>
         <Field label="LinkedIn URL">
           <input {...register('personal.linkedin')} className={inputCls} placeholder="https://linkedin.com/in/username" />
         </Field>
-        <Field label="Localização">
-          <input {...register('personal.location')} className={inputCls} placeholder="Cidade, País" />
+        <Field label="Location">
+          <input {...register('personal.location')} className={inputCls} placeholder="City, Country" />
         </Field>
-        <Field label="Cidadania">
-          <input {...register('personal.citizenship')} className={inputCls} placeholder="Ex: Cidadão Português" />
+        <Field label="Citizenship">
+          <input {...register('personal.citizenship')} className={inputCls} placeholder="e.g. Portuguese Citizen" />
         </Field>
-        <Field label="Visto / Permissão">
-          <input {...register('personal.permit')} className={inputCls} placeholder="Ex: Visto de Trabalho" />
+        <Field label="Visa / Permit">
+          <input {...register('personal.permit')} className={inputCls} placeholder="e.g. Work Permit" />
         </Field>
       </div>
     </div>
@@ -150,8 +144,12 @@ function PersonalSection({
 function SummarySection({ register }: { register: UseFormRegister<CVData> }) {
   return (
     <div>
-      <SectionHeader title="Resumo" />
-      <textarea {...register('summary')} className={textareaCls + ' w-full min-h-[100px]'} placeholder="Escreve um breve resumo profissional…" />
+      <SectionHeader title="Summary" />
+      <textarea
+        {...register('summary')}
+        className={textareaCls + ' w-full min-h-[100px]'}
+        placeholder="Write a brief professional summary…"
+      />
     </div>
   )
 }
@@ -161,34 +159,41 @@ function ExperienceSection({ register, control }: { register: UseFormRegister<CV
 
   return (
     <div>
-      <SectionHeader title="Experiência" />
+      <SectionHeader title="Experience" />
       <div className="flex flex-col gap-4">
         {fields.map((field, i) => (
           <EntryCard key={field.id} onRemove={() => remove(i)}>
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Cargo / Função">
+              <Field label="Job Title">
                 <input {...register(`experience.${i}.jobTitle`)} className={inputCls} placeholder="Software Engineer" />
               </Field>
-              <Field label="Empresa">
-                <input {...register(`experience.${i}.company`)} className={inputCls} placeholder="Nome da empresa" />
+              <Field label="Company">
+                <input {...register(`experience.${i}.company`)} className={inputCls} placeholder="Company name" />
               </Field>
-              <Field label="Data início">
-                <input {...register(`experience.${i}.startDate`)} className={inputCls} placeholder="mm/aaaa" />
+              <Field label="Start Date">
+                <input {...register(`experience.${i}.startDate`)} className={inputCls} placeholder="mm/yyyy" />
               </Field>
-              <Field label="Data fim">
-                <input {...register(`experience.${i}.endDate`)} className={inputCls} placeholder="Presente" />
+              <Field label="End Date">
+                <input {...register(`experience.${i}.endDate`)} className={inputCls} placeholder="Present" />
               </Field>
-              <Field label="Localização">
-                <input {...register(`experience.${i}.location`)} className={inputCls} placeholder="Cidade, País" />
+              <Field label="Location">
+                <input {...register(`experience.${i}.location`)} className={inputCls} placeholder="City, Country" />
               </Field>
             </div>
-            <Field label="Pontos principais (uma linha por ponto)">
-              <textarea {...register(`experience.${i}.bullets`)} className={textareaCls + ' w-full min-h-[100px]'} placeholder="Melhorei o desempenho em 25%&#10;Implementei pipelines CI/CD…" />
+            <Field label="Key points (one per line)">
+              <textarea
+                {...register(`experience.${i}.bullets`)}
+                className={textareaCls + ' w-full min-h-[100px]'}
+                placeholder={'Improved performance by 25%\nImplemented CI/CD pipelines…'}
+              />
             </Field>
           </EntryCard>
         ))}
       </div>
-      <AddButton onClick={() => append({ id: Date.now().toString(), jobTitle: '', company: '', startDate: '', endDate: '', location: '', bullets: '' })} label="Adicionar Experiência" />
+      <AddButton
+        onClick={() => append({ id: Date.now().toString(), jobTitle: '', company: '', startDate: '', endDate: '', location: '', bullets: '' })}
+        label="Add Experience"
+      />
     </div>
   )
 }
@@ -198,34 +203,37 @@ function EducationSection({ register, control }: { register: UseFormRegister<CVD
 
   return (
     <div>
-      <SectionHeader title="Educação" />
+      <SectionHeader title="Education" />
       <div className="flex flex-col gap-4">
         {fields.map((field, i) => (
           <EntryCard key={field.id} onRemove={() => remove(i)}>
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Grau / Curso">
-                <input {...register(`education.${i}.degree`)} className={inputCls} placeholder="Ex: Licenciatura em Informática" />
+              <Field label="Degree / Course">
+                <input {...register(`education.${i}.degree`)} className={inputCls} placeholder="e.g. BSc Computer Science" />
               </Field>
-              <Field label="Instituição">
-                <input {...register(`education.${i}.institution`)} className={inputCls} placeholder="Nome da instituição" />
+              <Field label="Institution">
+                <input {...register(`education.${i}.institution`)} className={inputCls} placeholder="Institution name" />
               </Field>
-              <Field label="Data início">
-                <input {...register(`education.${i}.startDate`)} className={inputCls} placeholder="mm/aaaa" />
+              <Field label="Start Date">
+                <input {...register(`education.${i}.startDate`)} className={inputCls} placeholder="mm/yyyy" />
               </Field>
-              <Field label="Data fim">
-                <input {...register(`education.${i}.endDate`)} className={inputCls} placeholder="mm/aaaa" />
+              <Field label="End Date">
+                <input {...register(`education.${i}.endDate`)} className={inputCls} placeholder="mm/yyyy" />
               </Field>
-              <Field label="Localização">
-                <input {...register(`education.${i}.location`)} className={inputCls} placeholder="Cidade, País" />
+              <Field label="Location">
+                <input {...register(`education.${i}.location`)} className={inputCls} placeholder="City, Country" />
               </Field>
             </div>
-            <Field label="Descrição">
-              <textarea {...register(`education.${i}.description`)} className={textareaCls + ' w-full'} placeholder="Áreas de foco, distinções…" />
+            <Field label="Description">
+              <textarea {...register(`education.${i}.description`)} className={textareaCls + ' w-full'} placeholder="Focus areas, achievements…" />
             </Field>
           </EntryCard>
         ))}
       </div>
-      <AddButton onClick={() => append({ id: Date.now().toString(), degree: '', institution: '', startDate: '', endDate: '', location: '', description: '' })} label="Adicionar Educação" />
+      <AddButton
+        onClick={() => append({ id: Date.now().toString(), degree: '', institution: '', startDate: '', endDate: '', location: '', description: '' })}
+        label="Add Education"
+      />
     </div>
   )
 }
@@ -235,23 +243,23 @@ function CertificationsSection({ register, control }: { register: UseFormRegiste
 
   return (
     <div>
-      <SectionHeader title="Certificações" />
+      <SectionHeader title="Certifications" />
       <div className="flex flex-col gap-4">
         {fields.map((field, i) => (
           <EntryCard key={field.id} onRemove={() => remove(i)}>
-            <Field label="Nome da Certificação">
-              <input {...register(`certifications.${i}.name`)} className={inputCls} placeholder="Nome da certificação" />
+            <Field label="Certification Name">
+              <input {...register(`certifications.${i}.name`)} className={inputCls} placeholder="Certification name" />
             </Field>
-            <Field label="Entidade emissora">
-              <input {...register(`certifications.${i}.issuer`)} className={inputCls} placeholder="Entidade emissora" />
+            <Field label="Issuing Organisation">
+              <input {...register(`certifications.${i}.issuer`)} className={inputCls} placeholder="Issuing organisation" />
             </Field>
-            <Field label="Descrição">
-              <textarea {...register(`certifications.${i}.description`)} className={textareaCls + ' w-full'} placeholder="Breve descrição…" />
+            <Field label="Description">
+              <textarea {...register(`certifications.${i}.description`)} className={textareaCls + ' w-full'} placeholder="Brief description…" />
             </Field>
           </EntryCard>
         ))}
       </div>
-      <AddButton onClick={() => append({ id: Date.now().toString(), name: '', issuer: '', description: '' })} label="Adicionar Certificação" />
+      <AddButton onClick={() => append({ id: Date.now().toString(), name: '', issuer: '', description: '' })} label="Add Certification" />
     </div>
   )
 }
@@ -261,17 +269,17 @@ function LanguagesSection({ register, control }: { register: UseFormRegister<CVD
 
   return (
     <div>
-      <SectionHeader title="Línguas" />
+      <SectionHeader title="Languages" />
       <div className="flex flex-col gap-3">
         {fields.map((field, i) => (
           <div key={field.id} className="border border-gray-100 rounded-lg p-3 bg-gray-50 grid grid-cols-4 gap-3 items-end">
-            <Field label="Língua">
-              <input {...register(`languages.${i}.name`)} className={inputCls} placeholder="Inglês" />
+            <Field label="Language">
+              <input {...register(`languages.${i}.name`)} className={inputCls} placeholder="English" />
             </Field>
-            <Field label="Nível">
-              <input {...register(`languages.${i}.level`)} className={inputCls} placeholder="Proficiente" />
+            <Field label="Level">
+              <input {...register(`languages.${i}.level`)} className={inputCls} placeholder="Proficient" />
             </Field>
-            <Field label="Pontos (1–4)">
+            <Field label="Dots (1–4)">
               <input
                 type="number"
                 min={1}
@@ -286,7 +294,7 @@ function LanguagesSection({ register, control }: { register: UseFormRegister<CVD
           </div>
         ))}
       </div>
-      <AddButton onClick={() => append({ id: Date.now().toString(), name: '', level: '', dots: 3 })} label="Adicionar Língua" />
+      <AddButton onClick={() => append({ id: Date.now().toString(), name: '', level: '', dots: 3 })} label="Add Language" />
     </div>
   )
 }
@@ -296,25 +304,25 @@ function SkillsSection({ register, control }: { register: UseFormRegister<CVData
 
   return (
     <div>
-      <SectionHeader title="Competências" />
+      <SectionHeader title="Skills" />
       <div className="flex flex-col gap-3">
         {fields.map((field, i) => (
           <div key={field.id} className="border border-gray-100 rounded-lg p-3 bg-gray-50 flex flex-col gap-2">
             <div className="flex gap-3 items-end">
               <div className="flex-1">
-                <Field label="Categoria">
+                <Field label="Category">
                   <input {...register(`skillCategories.${i}.category`)} className={inputCls} placeholder="Programming Languages" />
                 </Field>
               </div>
               <RemoveButton onClick={() => remove(i)} />
             </div>
-            <Field label="Itens (separados por vírgula)">
+            <Field label="Items (comma-separated)">
               <input {...register(`skillCategories.${i}.items`)} className={inputCls} placeholder="Java, Python, TypeScript" />
             </Field>
           </div>
         ))}
       </div>
-      <AddButton onClick={() => append({ id: Date.now().toString(), category: '', items: '' })} label="Adicionar Categoria" />
+      <AddButton onClick={() => append({ id: Date.now().toString(), category: '', items: '' })} label="Add Category" />
     </div>
   )
 }
@@ -324,28 +332,31 @@ function AwardsSection({ register, control }: { register: UseFormRegister<CVData
 
   return (
     <div>
-      <SectionHeader title="Distinções & Prémios" />
+      <SectionHeader title="Distinctions & Awards" />
       <div className="flex flex-col gap-4">
         {fields.map((field, i) => (
           <EntryCard key={field.id} onRemove={() => remove(i)}>
-            <Field label="Título">
-              <input {...register(`awards.${i}.title`)} className={inputCls} placeholder="Nome do prémio ou distinção" />
+            <Field label="Title">
+              <input {...register(`awards.${i}.title`)} className={inputCls} placeholder="Award or distinction name" />
             </Field>
             <div className="grid grid-cols-2 gap-3">
-              <Field label="Organização">
-                <input {...register(`awards.${i}.organization`)} className={inputCls} placeholder="Organização" />
+              <Field label="Organisation">
+                <input {...register(`awards.${i}.organization`)} className={inputCls} placeholder="Organisation" />
               </Field>
-              <Field label="Data">
-                <input {...register(`awards.${i}.date`)} className={inputCls} placeholder="mm/aaaa" />
+              <Field label="Date">
+                <input {...register(`awards.${i}.date`)} className={inputCls} placeholder="mm/yyyy" />
               </Field>
             </div>
-            <Field label="Descrição">
-              <textarea {...register(`awards.${i}.description`)} className={textareaCls + ' w-full'} placeholder="Breve descrição do prémio…" />
+            <Field label="Description">
+              <textarea {...register(`awards.${i}.description`)} className={textareaCls + ' w-full'} placeholder="Brief description…" />
             </Field>
           </EntryCard>
         ))}
       </div>
-      <AddButton onClick={() => append({ id: Date.now().toString(), title: '', organization: '', date: '', description: '' })} label="Adicionar Prémio" />
+      <AddButton
+        onClick={() => append({ id: Date.now().toString(), title: '', organization: '', date: '', description: '' })}
+        label="Add Award"
+      />
     </div>
   )
 }
@@ -354,8 +365,12 @@ function SoftSkillsSection({ register }: { register: UseFormRegister<CVData> }) 
   return (
     <div>
       <SectionHeader title="Soft Skills" />
-      <textarea {...register('softSkills')} className={textareaCls + ' w-full'} placeholder="Liderança&#10;Comunicação&#10;Trabalho em equipa" />
-      <p className="text-xs text-gray-400 mt-1">Uma skill por linha</p>
+      <textarea
+        {...register('softSkills')}
+        className={textareaCls + ' w-full'}
+        placeholder={'Leadership\nCommunication\nTeamwork'}
+      />
+      <p className="text-xs text-gray-400 mt-1">One skill per line</p>
     </div>
   )
 }
@@ -365,12 +380,12 @@ function OnlineLinksSection({ register, control }: { register: UseFormRegister<C
 
   return (
     <div>
-      <SectionHeader title="Links Online" />
+      <SectionHeader title="Online Links" />
       <div className="flex flex-col gap-3">
         {fields.map((field, i) => (
           <div key={field.id} className="border border-gray-100 rounded-lg p-3 bg-gray-50 grid grid-cols-5 gap-3 items-end">
             <div className="col-span-2">
-              <Field label="Etiqueta">
+              <Field label="Label">
                 <input {...register(`onlineLinks.${i}.label`)} className={inputCls} placeholder="GitHub" />
               </Field>
             </div>
@@ -385,7 +400,7 @@ function OnlineLinksSection({ register, control }: { register: UseFormRegister<C
           </div>
         ))}
       </div>
-      <AddButton onClick={() => append({ id: Date.now().toString(), label: '', url: '' })} label="Adicionar Link" />
+      <AddButton onClick={() => append({ id: Date.now().toString(), label: '', url: '' })} label="Add Link" />
     </div>
   )
 }
@@ -402,7 +417,6 @@ export function CVForm({ onChange }: { onChange: (data: CVData) => void }) {
   const onChangeRef = useRef(onChange)
   onChangeRef.current = onChange
 
-  // Subscribe to all form changes (text inputs + field array add/remove)
   useEffect(() => {
     const subscription = watch((value) => {
       onChangeRef.current(value as CVData)
