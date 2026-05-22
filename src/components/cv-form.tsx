@@ -116,31 +116,31 @@ function PersonalSection({
         </div>
         <div className="flex-1 grid grid-cols-2 gap-3">
           <Field label="Nome completo">
-            <input {...register('personal.name')} className={inputCls} placeholder="FERNANDO GONCALVES" />
+            <input {...register('personal.name')} className={inputCls} placeholder="Nome Apelido" />
           </Field>
           <Field label="Título / Cargo">
-            <input {...register('personal.title')} className={inputCls} placeholder="Full Stack Software Engineer" />
+            <input {...register('personal.title')} className={inputCls} placeholder="Ex: Software Engineer" />
           </Field>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <Field label="Telefone">
-          <input {...register('personal.phone')} className={inputCls} placeholder="+41 77 814 84 79" />
+          <input {...register('personal.phone')} className={inputCls} placeholder="+351 900 000 000" />
         </Field>
         <Field label="Email">
           <input {...register('personal.email')} className={inputCls} placeholder="email@exemplo.com" />
         </Field>
         <Field label="LinkedIn URL">
-          <input {...register('personal.linkedin')} className={inputCls} placeholder="https://linkedin.com/in/..." />
+          <input {...register('personal.linkedin')} className={inputCls} placeholder="https://linkedin.com/in/username" />
         </Field>
         <Field label="Localização">
-          <input {...register('personal.location')} className={inputCls} placeholder="Zurich, Switzerland" />
+          <input {...register('personal.location')} className={inputCls} placeholder="Cidade, País" />
         </Field>
         <Field label="Cidadania">
-          <input {...register('personal.citizenship')} className={inputCls} placeholder="Portuguese Citizen" />
+          <input {...register('personal.citizenship')} className={inputCls} placeholder="Ex: Cidadão Português" />
         </Field>
         <Field label="Visto / Permissão">
-          <input {...register('personal.permit')} className={inputCls} placeholder="Swiss Permit B" />
+          <input {...register('personal.permit')} className={inputCls} placeholder="Ex: Visto de Trabalho" />
         </Field>
       </div>
     </div>
@@ -173,13 +173,13 @@ function ExperienceSection({ register, control }: { register: UseFormRegister<CV
                 <input {...register(`experience.${i}.company`)} className={inputCls} placeholder="Nome da empresa" />
               </Field>
               <Field label="Data início">
-                <input {...register(`experience.${i}.startDate`)} className={inputCls} placeholder="01/2025" />
+                <input {...register(`experience.${i}.startDate`)} className={inputCls} placeholder="mm/aaaa" />
               </Field>
               <Field label="Data fim">
                 <input {...register(`experience.${i}.endDate`)} className={inputCls} placeholder="Presente" />
               </Field>
               <Field label="Localização">
-                <input {...register(`experience.${i}.location`)} className={inputCls} placeholder="Zurich, Switzerland" />
+                <input {...register(`experience.${i}.location`)} className={inputCls} placeholder="Cidade, País" />
               </Field>
             </div>
             <Field label="Pontos principais (uma linha por ponto)">
@@ -204,19 +204,19 @@ function EducationSection({ register, control }: { register: UseFormRegister<CVD
           <EntryCard key={field.id} onRemove={() => remove(i)}>
             <div className="grid grid-cols-2 gap-3">
               <Field label="Grau / Curso">
-                <input {...register(`education.${i}.degree`)} className={inputCls} placeholder="BSc Computer Science" />
+                <input {...register(`education.${i}.degree`)} className={inputCls} placeholder="Ex: Licenciatura em Informática" />
               </Field>
               <Field label="Instituição">
-                <input {...register(`education.${i}.institution`)} className={inputCls} placeholder="Universidade Aberta" />
+                <input {...register(`education.${i}.institution`)} className={inputCls} placeholder="Nome da instituição" />
               </Field>
               <Field label="Data início">
-                <input {...register(`education.${i}.startDate`)} className={inputCls} placeholder="09/2023" />
+                <input {...register(`education.${i}.startDate`)} className={inputCls} placeholder="mm/aaaa" />
               </Field>
               <Field label="Data fim">
-                <input {...register(`education.${i}.endDate`)} className={inputCls} placeholder="06/2027" />
+                <input {...register(`education.${i}.endDate`)} className={inputCls} placeholder="mm/aaaa" />
               </Field>
               <Field label="Localização">
-                <input {...register(`education.${i}.location`)} className={inputCls} placeholder="Lisboa (Remoto)" />
+                <input {...register(`education.${i}.location`)} className={inputCls} placeholder="Cidade, País" />
               </Field>
             </div>
             <Field label="Descrição">
@@ -240,10 +240,10 @@ function CertificationsSection({ register, control }: { register: UseFormRegiste
         {fields.map((field, i) => (
           <EntryCard key={field.id} onRemove={() => remove(i)}>
             <Field label="Nome da Certificação">
-              <input {...register(`certifications.${i}.name`)} className={inputCls} placeholder="Full Stack Development Level 5" />
+              <input {...register(`certifications.${i}.name`)} className={inputCls} placeholder="Nome da certificação" />
             </Field>
             <Field label="Entidade emissora">
-              <input {...register(`certifications.${i}.issuer`)} className={inputCls} placeholder="Code Institute" />
+              <input {...register(`certifications.${i}.issuer`)} className={inputCls} placeholder="Entidade emissora" />
             </Field>
             <Field label="Descrição">
               <textarea {...register(`certifications.${i}.description`)} className={textareaCls + ' w-full'} placeholder="Breve descrição…" />
@@ -329,14 +329,14 @@ function AwardsSection({ register, control }: { register: UseFormRegister<CVData
         {fields.map((field, i) => (
           <EntryCard key={field.id} onRemove={() => remove(i)}>
             <Field label="Título">
-              <input {...register(`awards.${i}.title`)} className={inputCls} placeholder="1º lugar – Hackathon" />
+              <input {...register(`awards.${i}.title`)} className={inputCls} placeholder="Nome do prémio ou distinção" />
             </Field>
             <div className="grid grid-cols-2 gap-3">
               <Field label="Organização">
-                <input {...register(`awards.${i}.organization`)} className={inputCls} placeholder="Code Institute" />
+                <input {...register(`awards.${i}.organization`)} className={inputCls} placeholder="Organização" />
               </Field>
               <Field label="Data">
-                <input {...register(`awards.${i}.date`)} className={inputCls} placeholder="08/2024" />
+                <input {...register(`awards.${i}.date`)} className={inputCls} placeholder="mm/aaaa" />
               </Field>
             </div>
             <Field label="Descrição">
