@@ -4,6 +4,7 @@ import { useForm, useFieldArray, UseFormRegister, Control } from 'react-hook-for
 import { useRef, useState, useCallback, useEffect } from 'react'
 import { CVData } from '@/lib/types'
 import { defaultCVData } from '@/lib/default-data'
+import { PhotoCropModal } from '@/components/photo-crop-modal'
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -75,16 +76,26 @@ function PersonalSection({
   photoPreview: string
 }) {
   const fileRef = useRef<HTMLInputElement>(null)
+  const [rawSrc, setRawSrc] = useState<string | null>(null)
 
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
     const reader = new FileReader()
-    reader.onload = () => onPhotoChange(reader.result as string)
+    reader.onload = () => setRawSrc(reader.result as string)
     reader.readAsDataURL(file)
+    e.target.value = ''
   }
 
   return (
+    <>
+      {rawSrc && (
+        <PhotoCropModal
+          src={rawSrc}
+          onConfirm={dataUrl => { onPhotoChange(dataUrl); setRawSrc(null) }}
+          onCancel={() => setRawSrc(null)}
+        />
+      )}
     <div className="flex flex-col gap-3">
       <SectionHeader title="Personal Information" />
       <div className="flex items-start gap-4">
@@ -138,6 +149,7 @@ function PersonalSection({
         </Field>
       </div>
     </div>
+    </>
   )
 }
 
