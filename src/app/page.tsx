@@ -193,16 +193,22 @@ export default function LandingPage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight max-w-3xl">
-            Create a professional CV{' '}
+            A CV built to reach{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-              in minutes
+              human eyes
             </span>
           </h1>
 
           <p className="text-lg text-slate-300 max-w-xl leading-relaxed">
-            Fill in your details, watch the PDF update live, and download instantly.
-            No account, no templates to buy, no limits.
+            Most CVs never reach a recruiter — they're filtered out by ATS software first.
+            This generator produces a clean, structured PDF that passes ATS systems and looks great to the humans on the other side.
           </p>
+
+          <div className="flex flex-wrap justify-center gap-3 text-sm">
+            {['✓ ATS-friendly format', '✓ Live PDF preview', '✓ Free forever'].map(t => (
+              <span key={t} className="bg-white/10 border border-white/10 rounded-full px-3 py-1 text-slate-300">{t}</span>
+            ))}
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mt-2">
             <Link
@@ -251,8 +257,8 @@ export default function LandingPage() {
               {
                 step: '03',
                 icon: <IconDownload />,
-                title: 'Download your PDF',
-                desc: 'Click Download. Get a clean, professional A4 PDF ready to send to any employer — no watermarks, no limits.',
+                title: 'Download & apply',
+                desc: 'One click gives you a clean A4 PDF — ATS-friendly structure, no watermarks, ready to attach to any application.',
               },
             ].map(item => (
               <div key={item.step} className="relative bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col gap-4">
@@ -275,7 +281,18 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <h2 className="text-3xl font-extrabold text-gray-900 mb-3">Everything you need</h2>
-            <p className="text-gray-500 text-lg">Built for job seekers, not for subscriptions.</p>
+            <p className="text-gray-500 text-lg">Built to get past the bots — and impress the humans.</p>
+          </div>
+
+          {/* ATS callout */}
+          <div className="mb-8 bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100 rounded-2xl p-6 flex gap-4 items-start">
+            <div className="text-3xl shrink-0">🤖</div>
+            <div>
+              <h3 className="font-bold text-gray-900 mb-1">The ATS problem — and how this solves it</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Over <span className="font-semibold text-gray-800">75% of CVs are rejected by ATS software</span> before a human ever sees them — usually because of complex layouts, tables, images in the wrong place, or non-standard fonts. This generator produces a clean, single-column structured PDF with no hidden elements, making it easy for any ATS to parse your experience correctly and pass your CV to the next stage.
+              </p>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-6">
@@ -340,7 +357,7 @@ export default function LandingPage() {
             href="/generate"
             className="bg-white text-blue-600 font-bold px-10 py-4 rounded-xl hover:bg-blue-50 transition-colors text-base shadow-lg"
           >
-            Start now — it's free →
+            Start now it's free →
           </Link>
         </div>
       </section>
@@ -351,7 +368,7 @@ export default function LandingPage() {
           <div className="text-5xl">☕</div>
           <h2 className="text-2xl font-extrabold text-gray-900">Like this tool?</h2>
           <p className="text-gray-600 leading-relaxed">
-            This CV generator is completely free and will stay that way. If it helped you land an interview or saved you time, consider buying me a coffee — it helps me keep building useful, free tools for everyone.
+            This CV generator is completely free and will stay that way. If it helped you land an interview or saved you time, consider buying me a coffee it helps me keep building useful, free tools for everyone.
           </p>
           <a
             href="https://www.buymeacoffee.com/imfernandodev"
@@ -362,7 +379,7 @@ export default function LandingPage() {
             <span className="text-xl">☕</span>
             Buy me a coffee
           </a>
-          <p className="text-xs text-gray-400">No pressure — the tool is free regardless.</p>
+          <p className="text-xs text-gray-400">No pressure the tool is free regardless.</p>
         </div>
       </section>
 
